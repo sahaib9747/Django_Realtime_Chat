@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+
+</head>
+<body>
+    <div class="content">
+        <h2>Chat Messages</h2>
+        <div class="message-container">
+            <div class="container">
+                <b>Md. Sahaib Mridha</b>
+                <p class="left">Hello. How are you today?</p>
+                <span class="time-left">11:00</span>
+            </div>
+            
+            <div class="container darker">
+                <p style="float: right">Hey! I'm fine. Thanks for asking!</p>
+                <span class="time-right" style="clear: right;">11:01</span>
+            </div>
+        
+            <div class="container">
+                <b>Md. Sahaib Mridha</b>
+                <p class="left">Hello. How are you today?</p>
+                <span class="time-left">11:00</span>
+            </div>
+            
+            <div class="container darker">
+                <p style="float: right">Hey! I'm fine. Thanks for asking!</p>
+                <span class="time-right" style="clear: right;">11:01</span>
+            </div>
+        </div>
+        <div class="send-message">
+            <form action="">
+                <textarea id="form7" class="md-textarea form-control" rows="3"></textarea>
+                <input type="submit" id="message" name="message" value="Send" class="form-control btn btn-success">            
+            </form>
+        </div>
+    </div>
+<body>
+</html>

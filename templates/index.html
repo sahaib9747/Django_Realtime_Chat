@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<style>
+    .text{
+        font-family:Arial, Helvetica, sans-serif;
+        font-weight: bold;
+    } 
+</style>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center m-5 p-3">
+                <h1 class="text">Join to Chat !!</h1>
+                <p >If you don't have any room, Just type to create new one</p>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <form action="">
+                <div class="form-group">
+                    <label for="room-name">Room Name:</label>
+                    <input type="text" id='room-name' name="room-name" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="user-name">User Name:</label>
+                    <input type="text" id='user-name' name="user-name" class="form-control">
+
+                </div>
+                <div class="form-group">
+                    <label for="password">Password:</label>
+                    <input type="password" id='password' name="password" class="form-control">
+                </div>
+                <input type="submit" value="Submit" class="btn btn-primary form-control">
+            </form>
+            </div>
+        </div>
+    </div>
+
+<script>
+
+    data = JSON.stringify({
+        headline: "Testing",
+        tag: "Testing",
+        background_image: "Testing",
+        content: "Testing",
+        user: 1
+    })
+    let csrftoken = getCookie('csrftoken');
+    let response = fetch("/auth/", {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json, text/plain, */*',
+            'Content-Type': 'application/json',
+            "X-CSRFToken": csrftoken },
+    })
+    
+    function getCookie(name) {
+        var cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            var cookies = document.cookie.split(';');
+            for (var i = 0; i < cookies.length; i++) {
+                var cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    
+</script>
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
