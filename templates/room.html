@@ -13,35 +13,104 @@
 <body>
     <div class="content">
         <h2>Chat Messages</h2>
-        <div class="message-container">
-            <div class="container">
-                <b>Md. Sahaib Mridha</b>
-                <p class="left">Hello. How are you today?</p>
-                <span class="time-left">11:00</span>
-            </div>
-            
-            <div class="container darker">
-                <p style="float: right">Hey! I'm fine. Thanks for asking!</p>
-                <span class="time-right" style="clear: right;">11:01</span>
-            </div>
-        
-            <div class="container">
-                <b>Md. Sahaib Mridha</b>
-                <p class="left">Hello. How are you today?</p>
-                <span class="time-left">11:00</span>
-            </div>
-            
-            <div class="container darker">
-                <p style="float: right">Hey! I'm fine. Thanks for asking!</p>
-                <span class="time-right" style="clear: right;">11:01</span>
-            </div>
+        <div class="message-container" id="msg-container">
+            <!--All the messages will append here-->
         </div>
-        <div class="send-message">
-            <form action="">
-                <textarea id="form7" class="md-textarea form-control" rows="3"></textarea>
-                <input type="submit" id="message" name="message" value="Send" class="form-control btn btn-success">            
+        <div class="send-message message-conatiner">
+            <form id="send-message">
+                <textarea type="text" id="message" name="msg" class="md-textarea form-control" rows="3"></textarea>
+                <input type="submit" id="sendButton" value="Send" class="form-control btn btn-success">            
             </form>
         </div>
     </div>
+
+    <script type="text/javascript">
+        //message sending block
+        var formSubmit = document.getElementById("send-message");
+        formSubmit.addEventListener('submit', function (event)
+            {
+                let message = document.getElementById('message');  //get the message 
+                event.preventDefault();    
+                data = {
+                    'message': message.value, 
+                    'username': "{{username}}",
+                    'room': "{{room}}"
+                };
+                message.value = '';  // clear the message input box
+                console.log(data['message']);
+                console.log(data['username']);
+                req = fetch('/send',{
+                    method: 'POST',
+                    headers: { 'Accept': 'application/json, text/plain, */*',
+                    'Content-Type': 'application/json',
+                    "X-CSRFToken": getCookie('csrftoken') },
+                   body: JSON.stringify(data)
+                });
+            });
+
+        function getCookie(name) {
+            var cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (var i = 0; i < cookies.length; i++) {
+                    var cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        // message getting block
+        setInterval(() => {
+            var totalNodes = document.getElementById("msg-container").childElementCount;
+            console.log(totalNodes)
+            getData = fetch('/getmsg/{{room}}/')
+            .then( (response) => {
+                console.log(response.status);
+                return response.json();
+            }).then(
+                (data) => {
+                    //console.log(data);
+                    //console.log(data.messages)
+                    const localuser = "{{username}}"
+                    let messageView = "";
+                    const messageContainer = document.getElementById('msg-container');
+                    for (var i in data.messages){
+                        id = data.messages[i].id;
+                        user = data.messages[i].user;
+                        message = data.messages[i].message;
+                        date = data.messages[i].date;
+                        len = data.messages.length // size of the total objects related to the room name.
+                        if (i >= totalNodes){
+                            if (user == localuser){
+                                messageView += `
+                                <div class="container darker">
+                                    <b style ="float: right">You</b>
+                                    <p style="float: right; clear: right">${message}</p>
+                                    <span class="time-right" style="clear: right;">${date}</span>
+                                </div>
+                                `
+                            } else{
+                                messageView += `
+                                <div class="container">
+                                    <b>${user}</b>
+                                    <p class="left">${message}</p>
+                                    <span class="time-left">${date}</span>
+                                </div>
+                                `
+                            }
+                            console.log(`I am  adding cause I am bigger node: ${totalNodes} id: ${id}`)
+                        }
+                        console.log(`I am not adding cause I am little node: ${totalNodes} id: ${id}`)
+                    }
+                    messageContainer.innerHTML += messageView; // append all messages
+                }
+            )
+        }, 1000)
+
+    </script>
 <body>
 </html>

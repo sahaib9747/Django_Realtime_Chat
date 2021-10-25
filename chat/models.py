@@ -1,5 +1,4 @@
-from datetime import datetime
-
+from django.utils import timezone
 from django.db import models
 from django.db.models.fields import DateTimeField, TextField
 
@@ -15,4 +14,7 @@ class Message(models.Model):
     room = TextField(blank=False)
     user = TextField(blank=False)
     message = TextField(blank=False)
-    date = DateTimeField(default=datetime.now())
+    date = DateTimeField(default=timezone.now())
+
+    def __str__(self):
+        return self.room
