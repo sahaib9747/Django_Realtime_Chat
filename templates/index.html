@@ -46,38 +46,6 @@
             </div>
         </div>
     </div>
-<!-- 
-<script>
-
-    data = JSON.stringify({
-        username: false,
-    })
-    let csrftoken = getCookie('csrftoken');
-    let response = fetch("/auth/", {
-        method: 'POST',
-        body: data,
-        headers: { 'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json',
-            "X-CSRFToken": csrftoken },
-    })
-    
-    function getCookie(name) {
-        var cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            var cookies = document.cookie.split(';');
-            for (var i = 0; i < cookies.length; i++) {
-                var cookie = cookies[i].trim();
-                if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
-    }
-    
-</script> -->
-
 <!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 

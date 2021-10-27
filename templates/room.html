@@ -18,7 +18,7 @@
         </div>
         <div class="send-message message-conatiner">
             <form id="send-message">
-                <textarea type="text" id="message" name="msg" class="md-textarea form-control" rows="3"></textarea>
+                <textarea type="text" id="message" name="msg" class="md-textarea form-control" rows="3" required></textarea>
                 <input type="submit" id="sendButton" value="Send" class="form-control btn btn-success">            
             </form>
         </div>
@@ -44,7 +44,7 @@
                     headers: { 'Accept': 'application/json, text/plain, */*',
                     'Content-Type': 'application/json',
                     "X-CSRFToken": getCookie('csrftoken') },
-                   body: JSON.stringify(data)
+                    body: JSON.stringify(data)
                 });
             });
 
@@ -110,7 +110,6 @@
                 }
             )
         }, 1000)
-
     </script>
 <body>
 </html>

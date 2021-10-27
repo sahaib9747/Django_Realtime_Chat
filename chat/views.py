@@ -40,7 +40,7 @@ def auth(request):
     else:
         new = Room.objects.create(name=room_name, password=password)
         new.save()
-        return redirect(f"chat/{room_name}/?username={user_name}")
+        return redirect(f"/chat/{room_name}/?username={user_name}")
 
 def send(request):
     print(request.body)
