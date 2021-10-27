@@ -1,5 +1,5 @@
 ## About
-Django real time chat application just implemented the basic concepts of real time chatting. It handles request asynchronously
+Django real time chat application just implemented the basic concepts of real time chatting. It handles the requests asynchronously
 
 ## Features
 * send messages
